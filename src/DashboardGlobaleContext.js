@@ -5,6 +5,9 @@ import MainOrders from "./Orders/Orders";
 import { getDiffTime } from "./Orders/OrderDatesFunctions";
 import OrdersDataByHours from "./OrdersDataByHours";
 import OrdersDataByDays from "./OrdersDataByDays";
+import GetBestProducts from "./GetBestProducts";
+import GetBestCountries from "./GetBestCountries";
+import Countries from "./Orders/Countries";
 
 let GlobaleContext = createContext()
 
@@ -16,6 +19,8 @@ export let GlobaleProvider = ({ children }) => {
     const [EndDay, setEndDay] = useState('15 Oct')
     const [ChartsXaxis, setChartsXaxis] = useState([])
     const [ChartsYaxis, setChartsYaxis] = useState([])
+    const [BestProducts, setBestProducts] = useState([])
+    const [BestCountries, setBestCountries] = useState([])
     const [CompareChartsYaxis, setCompareChartsYaxis] = useState([])
     const [DiffTime, setDiffTime] = useState(1)
     
@@ -26,9 +31,16 @@ export let GlobaleProvider = ({ children }) => {
         let startDateTime = new Date(new Date(StartDate).setHours(0)).getTime()
         let compareDateStart = new Date(startDateTime - 86400000 * (getDiffTime(StartDate, EndDate) + 1))
         let compareDateEnd = new Date(new Date(startDateTime).getTime() - 86400000)
+        
         let diff = getDiffTime(StartDate, EndDate) + 1
         setDiffTime(diff)
 
+        let bestProducts = GetBestProducts(Products, MainOrders, StartDate, EndDate)
+        setBestProducts(bestProducts)
+        
+        let bestCountries = GetBestCountries(Products, MainOrders, StartDate, EndDate, Countries)
+        setBestCountries(bestCountries)
+        
         if(diff < 16) {
             data = OrdersDataByHours(Products, MainOrders, StartDate, EndDate)
             compareData = OrdersDataByHours(Products, MainOrders, compareDateStart, compareDateEnd)
@@ -40,6 +52,7 @@ export let GlobaleProvider = ({ children }) => {
         setChartsXaxis(data[0].map(d => d.time))
         setChartsYaxis(data[0])
         setCompareChartsYaxis(compareData[0])
+
     }
 
     useEffect(() => {
@@ -57,6 +70,8 @@ export let GlobaleProvider = ({ children }) => {
         ChartsYaxis: [ChartsYaxis, setChartsYaxis],
         CompareChartsYaxis: [CompareChartsYaxis, setCompareChartsYaxis],
         DiffTime: [DiffTime, setDiffTime],
+        BestProducts: [BestProducts, setBestProducts],
+        BestCountries: [BestCountries, setBestCountries],
     }
 
     return (

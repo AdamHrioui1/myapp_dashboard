@@ -50,10 +50,10 @@ export let ChartObj = (X, Y, name, type, diff, currency, groups, series) => {
                         rotate: 0,
                         maxHeight: 50,
                         style: {
-                            colors: "#70707b",
+                            colors: "#707070",
                             fontSize: '12px',
-                            fontFamily: 'Helvetica, Arial, sans-serif',
-                            fontWeight: 200,
+                            fontFamily: 'Poppins',
+                            fontWeight: 500,
                             cssClass: 'chart_spans',
                         },
                         datetimeFormatter: {
@@ -83,8 +83,9 @@ export let ChartObj = (X, Y, name, type, diff, currency, groups, series) => {
                     tickAmount: 3,
                     labels: {
                         style: {
-                            colors: "#70707b",
+                            colors: "#707070",
                             fontSize: '15px',
+                            fontFamily: 'Poppins',
                         },
                         formatter: (value) => {
                             return currency ? formatter('USD').format(value) : parseInt(value)

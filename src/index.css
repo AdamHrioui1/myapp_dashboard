@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
 }
 
 body {
@@ -15,68 +16,9 @@ body {
   background-color: #def8ff;
 }
 
-.chart__container {
-  margin: 20px;
-  padding: 30px 30px 10px;
-  padding-left: 15px;
-  display: inline-block;
-
-  background-color: #fff;
-  border-radius: 8px;
-  /* box-shadow: #0000001a 2px 2px 15px; */
-  box-shadow: #00000009 10px 10px 15px;
-  border: 1px solid #85e5ff96;
-}
-
-.chart__container .title_container {
-  margin-left: 20px;
-  margin-bottom: 10px;
-  
+.home__charts__container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-size: 27px;
-  color: #00536a;
-  font-weight: 600;
-
-  font-family: 'poppins';
-}
-
-.chart__container .title_container .chart_title_left h1 {
-  
-  font-size: 30px;
-  color: #00536a;
-  font-weight: 500;
-
-  font-family: 'poppins';
-}
-
-.chart__container .title_container div span {
-  font-size: 17px;
-  margin-right: 10px;
-  font-weight: 500;
-  font-family: 'poppins';
-}
-
-.chart__container .title_container .chart_title_right {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.chart__container .title_container .chart_title_right .c_t_r_top span {
-  color: #00536ab0;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.chart__container .title_container .chart_title_right .c_t_r_bottom {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .choose__date {
@@ -111,3 +53,70 @@ body {
 .chart_spans {
   border: 1px solid #000;
 }
+
+/*---------------------- row_chart -------------------*/
+.row_chart {
+  margin: 20px;
+  padding: 40px;
+  display: inline-block;
+
+  width: 650px;
+
+  background-color: #fff;
+  border-radius: 8px;
+  /* box-shadow: #0000001a 2px 2px 15px; */
+  box-shadow: #00000009 10px 10px 15px;
+  border: 1px solid #85e5ff96;
+}
+
+.best_product_chart {
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.best_product_chart .left {
+  max-width: 60px;
+  width: 100%;
+}
+
+.best_product_chart .left img {
+  padding: 5px;
+  max-width: 50px;
+  width: 100%;
+}
+
+.best_product_chart .center {
+  max-width: 420px;
+  width: 100%;
+
+  flex: 1;
+}
+
+.best_product_chart .center div {
+  padding: 0px 10px;
+  
+  text-align: right;
+  color: #00536a;
+  font-size: 14px;
+  font-weight: 500;
+
+  border-radius: 4px;
+  background-color: #85e5ff;
+  transition: .7s all ease-in-out;
+  
+  font-family: 'poppins';
+  box-shadow: #0000000d 2px 8px 16px;
+}
+
+.best_product_chart span {
+  padding: 0 10px;
+  display: inline;
+  color: #00536a;
+
+  font-family: 'poppins';
+}
+
+@import url('./styles/simpleChart.scss');

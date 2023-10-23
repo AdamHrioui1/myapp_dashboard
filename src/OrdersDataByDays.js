@@ -4,6 +4,7 @@ let OrdersDataByDays = (products, orders, date1, date2) => {
     let daysInterval = 1
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     let [_, filtredOrders] = filterOrdersByDate(orders, date1, date2)
+
     let arrOfDates = []
     let diff = getDiffTime(date1, date2) + 1
     let d1 = new Date(date1).setHours(0)

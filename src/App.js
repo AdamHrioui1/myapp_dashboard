@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react';
 import { useDashboardGlobalContext } from './DashboardGlobaleContext';
 import { calcPercent, calcTotal } from './Orders/OrderDatesFunctions';
 import GlobalChart from './components/GlobalChart';
+import RowChart from './components/RowChart';
+import CompareRowChart from './components/CompareRowChart';
 
 function App() {
+  let [ChartType, setChartType] = useState('bar')
+  let [Charts, setCharts] = useState([])
+  let [RowCharts, setRowCharts] = useState([])
   let state = useDashboardGlobalContext()
-  const [ChartType, setChartType] = useState('bar')
   let [StartDate, setStartDate] = state.StartDate
   let [EndDate, setEndDate] = state.EndDate
   let [DiffTime] = state.DiffTime
   let [ChartsXaxis] = state.ChartsXaxis
   let [ChartsYaxis] = state.ChartsYaxis
   let [CompareChartsYaxis] = state.CompareChartsYaxis
-  const [Charts, setCharts] = useState([])
+  let [BestProducts] = state.BestProducts
+  let [BestCountries] = state.BestCountries
 
   let chartTitles = ['total', 'profit', 'capital', 'total_units', 'total_orders']
 
@@ -110,10 +115,49 @@ function App() {
           percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[0]),
           single: '',
         },
-        
+      ]
+
+      let rowCharts = [
+        {
+          _id: 0,
+          title: 'Total',
+          name: 'total',
+          currency: true,
+          total: calcTotal(ChartsYaxis, chartTitles[0]),
+          percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[0]),
+          single: '',
+        },
+        {
+          _id: 1,
+          title: 'Profit',
+          name: 'profit',
+          currency: true,
+          total: calcTotal(ChartsYaxis, chartTitles[1]),
+          percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[1]),
+          single: '',
+        },
+        {
+          _id: 2,
+          title: 'Capital',
+          name: 'capital',
+          currency: true,
+          total: calcTotal(ChartsYaxis, chartTitles[2]),
+          percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[2]),
+          single: '',
+        },
+        {
+          _id: 3,
+          title: 'Total Units',
+          name: 'total_units',
+          currency: false,
+          total: calcTotal(ChartsYaxis, chartTitles[3]),
+          percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[3]),
+          single: 'unit',
+        },
       ]
 
       setCharts(charts)
+      setRowCharts(rowCharts)
     }
   }
 
@@ -137,12 +181,43 @@ function App() {
         </select>
       </div>
       
-      {
-        Charts.map(chart => <GlobalChart key={chart._id} props={ chart } />)
-      }
-
+      <div className="home__charts__container">
+        { Charts.map(chart => <GlobalChart key={Math.random()} props={ chart } />) }
+        { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestProducts} />) }
+        <CompareRowChart 
+          main='total' 
+          title={'Total - Profit - Units'}
+          Data={BestProducts}
+          CompareChartsYaxis={CompareChartsYaxis}
+          ChartsYaxis={ChartsYaxis}
+          MainElements={[
+            { name: 'total', title: 'Total', currency: true },
+            { name: 'profit', title: 'Profit', currency: true },
+            { name: 'total_units', title: 'Total Units', currency: false }
+          ]}
+          sortBy='total'
+        />
+        
+        { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestCountries} />) }
+        
+        <CompareRowChart 
+          main='total' 
+          title={'Total - Profit - Units'}
+          Data={BestCountries}
+          CompareChartsYaxis={CompareChartsYaxis}
+          ChartsYaxis={ChartsYaxis}
+          MainElements={[
+            { name: 'total', title: 'Total', currency: true },
+            { name: 'profit', title: 'Profit', currency: true },
+            { name: 'total_units', title: 'Total Units', currency: false }
+          ]}
+          sortBy='total'
+        />
+      </div>
     </>
   )
 }
+
+
 
 export default App
