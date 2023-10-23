@@ -18,12 +18,47 @@ function App() {
   let [CompareChartsYaxis] = state.CompareChartsYaxis
   let [BestProducts] = state.BestProducts
   let [BestCountries] = state.BestCountries
-
+  let [BestReferrersBySales] = state.BestReferrersBySales
+  let [BestCountriesByVisits] = state.BestCountriesByVisits
+  let [BestReferrersByVisits] = state.BestReferrersByVisits
+  let [CompareBestCountriesByVisits] = state.CompareBestCountriesByVisits
+  let [CompareBestReferrersByVisits] = state.CompareBestReferrersByVisits
+  let [VisitorsData] = state.VisitorsData
+  let [CompareVisitorsData] = state.CompareVisitorsData
+  let [RegistredClients] = state.RegistredClients
+  let [CompareRegistredClients] = state.CompareRegistredClients
+  
   let chartTitles = ['total', 'profit', 'capital', 'total_units', 'total_orders']
 
   let getCharts = () => {
     if(ChartsYaxis.length !== 0) {
       let charts = [
+        {
+          _id: 10,
+          name: 'Visits',
+          type: ChartType,
+          diff: DiffTime,
+          currency: false,
+          x: ChartsXaxis,
+          y: VisitorsData.map(y => y['total_visits']),
+          total: calcTotal(VisitorsData, 'total_visits'),
+          series: [],
+          percent: calcPercent(CompareVisitorsData, VisitorsData, 'total_visits'),
+          single: 'visitor',
+        },
+        {
+          _id: 20,
+          name: 'Registed Clients',
+          type: ChartType,
+          diff: DiffTime,
+          currency: false,
+          x: ChartsXaxis,
+          y: RegistredClients.map(y => y['total_visits']),
+          total: calcTotal(RegistredClients, 'total_visits'),
+          series: [],
+          percent: calcPercent(CompareRegistredClients, RegistredClients, 'total_visits'),
+          single: 'new client',
+        },
         {
           _id: 0,
           name: 'Total',
@@ -213,6 +248,47 @@ function App() {
           ]}
           sortBy='total'
         />
+        
+        
+        { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestReferrersBySales} />) }
+
+        <CompareRowChart 
+          main='total' 
+          title={'Total - Profit - Units'}
+          Data={BestReferrersBySales}
+          CompareChartsYaxis={CompareChartsYaxis}
+          ChartsYaxis={ChartsYaxis}
+          MainElements={[
+            { name: 'total', title: 'Total', currency: true },
+            { name: 'profit', title: 'Profit', currency: true },
+            { name: 'total_units', title: 'Total Units', currency: false }
+          ]}
+          sortBy='total'
+        />
+
+        <RowChart key={Math.random() + "horay"} props={ 
+          {
+            _id: 0,
+            title: 'Visits By Countries',
+            name: 'total_visits',
+            currency: false,
+            total: calcTotal(BestCountriesByVisits, 'total_visits'),
+            percent: calcPercent(CompareBestCountriesByVisits, BestCountriesByVisits, 'total_visits'),
+            single: '',
+          }  
+        } Data={BestCountriesByVisits} />
+        
+        <RowChart key={Math.random() + "woow"} props={ 
+          {
+            _id: Math.random(),
+            title: 'Visits By Social Media',
+            name: 'total_visits',
+            currency: false,
+            total: calcTotal(BestReferrersByVisits, 'total_visits'),
+            percent: calcPercent(CompareBestReferrersByVisits, BestReferrersByVisits, 'total_visits'),
+            single: '',
+          }  
+        } Data={BestReferrersByVisits} />
       </div>
     </>
   )

@@ -50,7 +50,7 @@ export let formatter = (currency) => new Intl.NumberFormat('en-US', {
 });
 
 export let calcTotal = (arr, name) => {
-    return arr.map(d => d[name]).reduce((a, b) => a + b)
+    return arr.length > 0 ? arr.map(d => d[name]).reduce((a, b) => a + b) : 0
 }
 
 export let calcPercent = (compArr, arr, name) => {

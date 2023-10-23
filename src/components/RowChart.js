@@ -43,7 +43,7 @@ let RowChart = ({ props, Data }) => {
                     .sort((a, b) => b[name] - a[name])
                     .map(product => {
                         return (
-                            <div className='body' key={product.name + Math.random()} datatype={product.name + Math.random()}>
+                            <div className='body' key={product.name + Math.random()}>
                                 <div className="left">
                                     <img src={product.small_img} alt="" title={product.name} />
                                 </div>
