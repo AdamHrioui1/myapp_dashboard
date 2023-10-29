@@ -1,19 +1,23 @@
 .simple__chart__container {
-    margin: 20px;
-    padding: 15px 30px 20px 10px;
-    max-width: 650px;
+    padding: 10px 20px 10px 10px;
+    max-width: 32%;
     width: 100%;
+    min-height: 286px;
 
-    display: inline-block;
-
+    display: flex;
+    flex-direction: column;
+    
     background-color: #fff;
     border: 1px solid #85e5ff96;
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: #00000009 10px 10px 15px;
+
     
     .header {
-        margin-left: 15px;
-        margin-bottom: 10px;
+        /* margin-left: 15px;
+        padding-right: 10px;*/
+        margin-bottom: 30px;
+        width: 100%;
         
         display: flex;
         align-items: center;
@@ -24,33 +28,67 @@
         color: #00536a;
 
         .left {
-            
-            > span {
-                margin-right: 10px;
-                font-size: 17px;
-                font-weight: 500;
+            padding-left: 5px;
+            width: auto;
+
+            > .img__title {
+                padding-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .img_container {
+                    margin-right: 5px;
+                    height: 24px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    > img {
+                        width: 24px;
+                    }
+                }
+                
+                > span {
+                    margin-left: 10px;
+                    width: 100%;
+
+                    color: #666;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
             }
 
+
             > h1 {
+                margin-top: 5px;
                 color: #00536a;
-                font-size: 30px;
+                font-size: 24px;
                 font-weight: 500;
+                font-family: 'Roboto';
                 
                 > span {
                     margin-left: 5px;
-                    font-size: 17px;
-                    font-weight: 500;
+                    font-size: 13px;
+                    font-weight: 400;
                 }
             }
         }
 
         .right {
+            margin-bottom: auto;
+            margin-top: 13px;
+            
             display: flex;
             align-items: flex-start;
             justify-content: center;
             flex-direction: column;
-
+            
             .top {
+                margin-left: auto;
+                display: flex;
+
                 > span {
                     color: #00536ab0;
                     font-size: 14px;
@@ -79,8 +117,6 @@
     }
 
     .content {
-        margin-top: 20px;
-        padding-left: 10px;
         width: 100%;
         
         .body {
@@ -94,19 +130,41 @@
             }
     
             .left {
-                max-width: 60px;
+                max-width: 50px;
                 width: 100%;
+
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                .percent {
+                    margin-left: 5px;
+                    display: flex;
+                    flex-direction: column;
+
+                    > .content {
+                        margin-bottom: 5px;
+                        display: flex;
+                        
+                        > span {
+                            font-size: 10px;
+                            line-height: 10px;
+                        }
+
+                        &:nth-last-child(1) {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
 
                 > img {
                     padding: 5px;
-                    max-width: 42px;
+                    max-width: 34px;
                     width: 100%;
                 }
             }
     
             .center {
-                max-width: 420px;
-                width: 100%;
                 flex: 1;
     
                 .bar {
@@ -131,7 +189,7 @@
                         left: 50%;
                         transform: translate(-50%, 0%);
 
-                        padding: 10px 20px;
+                        padding: 10px;
                         max-width: 200px;
                         width: max-content;
 
@@ -176,7 +234,7 @@
                     }
 
                     .bar {
-                        padding: 4px;
+                        padding: 3px;
                         border-radius: 10px;
 
                         box-shadow: #00000012 2px 4px 4px;
@@ -222,9 +280,9 @@
                         font-size: 14px;
                         line-height: 14px;
     
-                        &:nth-child(1) {
-                            font-size: 12px;
-                            line-height: 12px;
+                        &:nth-child(2) {
+                            font-size: 10px;
+                            line-height: 10px;
                         }
                     }
                 }
@@ -243,6 +301,18 @@
                     }
                 }
             }
+        }
+
+        .no__data {
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
         }
     }
 
@@ -287,5 +357,32 @@
                 font-size: 12px;
             }
         }
+    }
+
+    .see_more {
+        margin-top: auto;
+        padding: 10px 10px 4px 10px;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        > a {
+            color: #2dd0fe;
+        }
+    }
+}
+
+
+@media (max-width: 1550px) {
+    .simple__chart__container {
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 1250px) {
+    .simple__chart__container {
+        max-width: 100%;
     }
 }

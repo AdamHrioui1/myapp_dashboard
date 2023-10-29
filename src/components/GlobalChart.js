@@ -6,7 +6,7 @@ import incomeUp from '../assets/income_up.svg'
 import incomeDown from '../assets/income_down.svg'
 
 function GlobalChart({ props }) {
-    const { name, type, diff, currency, x, y, total, percent, single, series } = props
+    const { name, type, diff, currency, x, y, total, percent, single, series, img } = props
     let state = useDashboardGlobalContext()
     let [StartDay] = state.StartDay
     let [EndDay] = state.EndDay
@@ -18,7 +18,12 @@ function GlobalChart({ props }) {
         <div className="simple__chart__container">
             <div className="header">
                 <div className='left'>
-                    <span>{name}:</span>
+                    <div className="img__title">
+                        <div className="img_container">
+                            <img src={`/assets/charts_icons/${img}`} alt="" />
+                        </div>
+                        <span>{name}</span>
+                    </div>
                     <h1>
                         {
                             currency ? 
@@ -34,13 +39,7 @@ function GlobalChart({ props }) {
                         <span>{StartDay} - {EndDay}</span>
                     </div>
                     <div className="bottom">
-                        <span 
-                            style={{ 
-                                color: percent >= 0 ? 
-                                '#4ccb00' : 
-                                '#ff7070'
-                            }}
-                        >
+                        <span style={{ color: percent >= 0 ? '#4ccb00' : '#ff7070' }}>
                             { percent >= 0 && '+' } { percent.toFixed(2) }%
                         </span>
                         <img src={percent >= 0 ? incomeUp : incomeDown} alt="arrow up" />
@@ -52,39 +51,15 @@ function GlobalChart({ props }) {
                 options={options.options}
                 series={options.series}
                 type={type}
-                width="600"
-                height={300}
+                width="100%"
+                height={250}
             />
+
+            <div className="see_more">
+                <a href="/">See more 🡒</a>                
+            </div>
         </div>
     )
 }
 
 export default GlobalChart
-
-/*
-<div className="chart__container">
-    <div className="title_container">
-        <div className='chart_title_left'>
-            <span>{name}: </span>
-            <h1>{currency ? formatter('USD').format(total) : total.toLocaleString()} <span>{single}</span></h1>
-        </div>
-        <div className='chart_title_right'>
-            <div className="c_t_r_top">
-                <span>{StartDay} - {EndDay}</span>
-            </div>
-            <div className="c_t_r_bottom">
-                <span style={{ color: percent >= 0 ? '#4ccb00' : '#ff7070' }} >{percent > 0 && '+'} {percent.toFixed(2)}%</span>
-                <img src={percent >= 0 ? incomeUp : incomeDown} alt="" />
-            </div>
-        </div>
-    </div>
-
-    <Chart
-        options={options.options}
-        series={options.series}
-        type={type}
-        width="600"
-        height={300}
-    />
-</div>
-*/

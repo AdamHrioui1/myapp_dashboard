@@ -3,8 +3,8 @@ import { formatter } from '../Orders/OrderDatesFunctions';
 import incomeUp from '../assets/income_up.svg'
 import incomeDown from '../assets/income_down.svg'
 
-let RowChart = ({ props, Data }) => {
-    const { name, title, currency, total, percent, single } = props
+let RowChart = ({ props }) => {
+    const { name, title, by, currency, total, percent, single, img, Data } = props
     let state = useDashboardGlobalContext()
     let [StartDay] = state.StartDay
     let [EndDay] = state.EndDay
@@ -13,7 +13,12 @@ let RowChart = ({ props, Data }) => {
         <div className='simple__chart__container'>
             <div className="header">
                 <div className='left'>
-                    <span>{title}:</span>
+                    <div className="img__title">
+                        <div className="img_container">
+                            <img src={`/assets/charts_icons/${img}`} alt="" />
+                        </div>
+                        <span>{title} {!by ? '' : by}</span>
+                    </div>
                     <h1>
                         {
                             currency ? 
@@ -39,13 +44,15 @@ let RowChart = ({ props, Data }) => {
 
             <div className="content">
                 {
+                    Data.length !== 0 ?
                     Data
                     .sort((a, b) => b[name] - a[name])
-                    .map(product => {
+                    .slice(0, 6)
+                    .map((product, i) => {
                         return (
-                            <div className='body' key={product.name + Math.random()}>
+                            <div className='body' key={title + i}>
                                 <div className="left">
-                                    <img src={product.small_img} alt="" title={product.name} />
+                                    <img src={product.small_img} alt="" title={product.name ? product.name : product._id} />
                                 </div>
 
                                 <div className="center" 
@@ -60,11 +67,7 @@ let RowChart = ({ props, Data }) => {
                                     >
                                         <div className="popup">
                                             <span></span>
-                                            {
-                                                currency ?
-                                                `${formatter('USD').format(product[name])} (${(product[name] / total * 100).toFixed(2)}%)` :
-                                                `${product[name]} (${(product[name] / total * 100).toFixed(2)}%)`
-                                            }
+                                            {(product[name] / total * 100).toFixed(2)}%
                                         </div>
                                     </div>
                                 </div>
@@ -84,8 +87,16 @@ let RowChart = ({ props, Data }) => {
                                 </div>
                             </div>
                         )
-                    })
+                    }) :
+
+                    <div className='no__data'>
+                        <p>There was no data found for this date range.</p>
+                    </div>
                 }
+            </div>
+
+            <div className="see_more">
+                <a href="/">See more 🡒</a>                
             </div>
         </div>
     )

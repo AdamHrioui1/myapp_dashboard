@@ -1,0 +1,92 @@
+.dashboard_header {
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 0;
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+    
+    .date__range {
+        padding: 10px;
+        padding-left: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        > h3 {
+            font-weight: 600;
+        }
+
+        .date__picker__btn {
+            padding: 5px 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            background-color: #fff;
+            border: 1px solid #85e5ff96;
+            border-radius: 6px;
+            outline: none;
+            
+            box-shadow: 0 4px 10px #DEE7E8;
+            cursor: pointer;
+
+            > img {
+                width: 22px;
+            }
+
+            > span {
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            > p {
+                font-size: 14px;
+                font-weight: 500;
+            }
+            
+            
+            &:hover {
+                box-shadow: 0 4px 10px #DEE7E800;
+            }
+
+            &:active {
+                border: 1px solid transparent;
+                box-shadow: 0 0 6px #c9c9c9 inset;
+            }
+        }
+    }
+
+    .btns__container {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        .btn {
+            padding: 5px 10px;
+        }
+    }
+
+    .select__chart__type {
+        margin-left: auto;
+    }
+}
+
+.date__picker {
+    width: 100%;
+
+    &.show {
+        display: block;
+    }
+    &.hide {
+        display: none;
+    }
+}

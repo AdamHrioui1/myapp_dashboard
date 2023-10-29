@@ -36,6 +36,7 @@ function App() {
         {
           _id: 10,
           name: 'Visits',
+          img: 'visits.svg',
           type: ChartType,
           diff: DiffTime,
           currency: false,
@@ -49,6 +50,7 @@ function App() {
         {
           _id: 20,
           name: 'Registed Clients',
+          img: 'client.svg',
           type: ChartType,
           diff: DiffTime,
           currency: false,
@@ -61,7 +63,8 @@ function App() {
         },
         {
           _id: 0,
-          name: 'Total',
+          name: 'Total Sales',
+          img: 'total.svg',
           type: ChartType,
           diff: DiffTime,
           currency: true,
@@ -74,7 +77,8 @@ function App() {
         },
         {
           _id: 1,
-          name: 'Profit',
+          name: 'Sales Profit',
+          img: 'profit.svg',
           type: ChartType,
           diff: DiffTime,
           currency: true,
@@ -87,7 +91,8 @@ function App() {
         },
         {
           _id: 2,
-          name: 'Capital',
+          name: 'Sales Capital',
+          img: 'wallet.svg',
           type: ChartType,
           diff: DiffTime,
           currency: true,
@@ -100,7 +105,8 @@ function App() {
         },
         {
           _id: 3,
-          name: 'Total Units',
+          name: 'Total Sold Units',
+          img: 'tshirt.svg',
           type: ChartType,
           diff: DiffTime,
           currency: false,
@@ -114,6 +120,7 @@ function App() {
         {
           _id: 4,
           name: 'Total Orders',
+          img: 'order.svg',
           type: ChartType,
           diff: DiffTime,
           currency: false,
@@ -126,7 +133,8 @@ function App() {
         },
         {
           _id: 5,
-          name: 'Total - Profit - Capital',
+          name: 'Combine Sales (Total - Profit - Capital)',
+          img: 'total.svg',
           type: 'line',
           diff: DiffTime,
           currency: true,
@@ -155,8 +163,10 @@ function App() {
       let rowCharts = [
         {
           _id: 0,
-          title: 'Total',
+          title: 'Total Sales by ',
           name: 'total',
+          img: 'tshirt.svg',
+          by: 'Product',
           currency: true,
           total: calcTotal(ChartsYaxis, chartTitles[0]),
           percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[0]),
@@ -164,8 +174,10 @@ function App() {
         },
         {
           _id: 1,
-          title: 'Profit',
+          title: 'Sales Profit by ',
           name: 'profit',
+          img: 'tshirt.svg',
+          by: 'Product',
           currency: true,
           total: calcTotal(ChartsYaxis, chartTitles[1]),
           percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[1]),
@@ -173,8 +185,10 @@ function App() {
         },
         {
           _id: 2,
-          title: 'Capital',
+          title: 'Capital Spent by ',
           name: 'capital',
+          img: 'tshirt.svg',
+          by: 'Product',
           currency: true,
           total: calcTotal(ChartsYaxis, chartTitles[2]),
           percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[2]),
@@ -182,8 +196,10 @@ function App() {
         },
         {
           _id: 3,
-          title: 'Total Units',
+          title: 'Total Sold Units by ',
           name: 'total_units',
+          img: 'tshirt.svg',
+          by: 'Product',
           currency: false,
           total: calcTotal(ChartsYaxis, chartTitles[3]),
           percent: calcPercent(CompareChartsYaxis, ChartsYaxis, chartTitles[3]),
@@ -221,7 +237,8 @@ function App() {
         { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestProducts} />) }
         <CompareRowChart 
           main='total' 
-          title={'Total - Profit - Units'}
+          title={'Sales by Product (Total - Profit - Units)'}
+          img={'tshirt.svg'}
           Data={BestProducts}
           CompareChartsYaxis={CompareChartsYaxis}
           ChartsYaxis={ChartsYaxis}
@@ -233,11 +250,12 @@ function App() {
           sortBy='total'
         />
         
-        { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestCountries} />) }
+        { RowCharts.map(chart => <RowChart key={Math.random()} props={{ ...chart, img: 'countries.svg', by: 'Country' }} Data={BestCountries} />) }
         
         <CompareRowChart 
           main='total' 
-          title={'Total - Profit - Units'}
+          title={'Sales by Country (Total - Profit - Units)'}
+          img={'countries.svg'}
           Data={BestCountries}
           CompareChartsYaxis={CompareChartsYaxis}
           ChartsYaxis={ChartsYaxis}
@@ -247,14 +265,17 @@ function App() {
             { name: 'total_units', title: 'Total Units', currency: false }
           ]}
           sortBy='total'
+          by='Country'
         />
         
         
-        { RowCharts.map(chart => <RowChart key={Math.random()} props={ chart } Data={BestReferrersBySales} />) }
+        { RowCharts.map(chart => <RowChart key={Math.random()} props={{ ...chart, img: 'social_media.svg', by: 'Channel' }} Data={BestReferrersBySales} />) }
 
         <CompareRowChart 
           main='total' 
-          title={'Total - Profit - Units'}
+          title={'Sales by Channel (Total - Profit - Units)'}
+          by='Channel'
+          img={'social_media.svg'}
           Data={BestReferrersBySales}
           CompareChartsYaxis={CompareChartsYaxis}
           ChartsYaxis={ChartsYaxis}
@@ -271,6 +292,8 @@ function App() {
             _id: 0,
             title: 'Visits By Countries',
             name: 'total_visits',
+            img: 'visits.svg',
+            by: '',
             currency: false,
             total: calcTotal(BestCountriesByVisits, 'total_visits'),
             percent: calcPercent(CompareBestCountriesByVisits, BestCountriesByVisits, 'total_visits'),
@@ -283,6 +306,8 @@ function App() {
             _id: Math.random(),
             title: 'Visits By Social Media',
             name: 'total_visits',
+            img: 'social_media.svg',
+            by: '',
             currency: false,
             total: calcTotal(BestReferrersByVisits, 'total_visits'),
             percent: calcPercent(CompareBestReferrersByVisits, BestReferrersByVisits, 'total_visits'),

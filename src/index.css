@@ -4,21 +4,77 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  /* font-family: 'Inter', sans-serif; */
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Inter', sans-serif;
 }
 
 body {
+  padding-top: 80px;
+  padding-left: 235px;
+
   width: 100vw;
   min-height: 100vh;
 
   overflow-x: hidden;
-  background-color: #def8ff;
+  background-color: #F3FEFF;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent !important;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaedff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
 .home__charts__container {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.home__charts__container .group__charts {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+}
+
+.charts_title {
+  margin: 10px 0;
+  padding: 0 20px;
+  padding-left: 0;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.charts_title h2 {
+  margin-right: 20px;
+  display: block;
+  min-width: max-content;
+
+  color: #00536a;
+}
+
+.charts_title hr {
+  width: 100%;
+  height: 2px;
+  
+  border: none;
+  border-bottom: 1px dashed #00536a;
 }
 
 .choose__date {
@@ -54,69 +110,29 @@ body {
   border: 1px solid #000;
 }
 
-/*---------------------- row_chart -------------------*/
-.row_chart {
-  margin: 20px;
-  padding: 40px;
-  display: inline-block;
-
-  width: 650px;
+/*----------- Global ----------*/
+input, select, textarea, .btn {
+  padding: 5px;
 
   background-color: #fff;
-  border-radius: 8px;
-  /* box-shadow: #0000001a 2px 2px 15px; */
-  box-shadow: #00000009 10px 10px 15px;
+  outline: none;
   border: 1px solid #85e5ff96;
-}
-
-.best_product_chart {
-  margin-bottom: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.best_product_chart .left {
-  max-width: 60px;
-  width: 100%;
-}
-
-.best_product_chart .left img {
-  padding: 5px;
-  max-width: 50px;
-  width: 100%;
-}
-
-.best_product_chart .center {
-  max-width: 420px;
-  width: 100%;
-
-  flex: 1;
-}
-
-.best_product_chart .center div {
-  padding: 0px 10px;
+  border-radius: 6px;
   
-  text-align: right;
-  color: #00536a;
-  font-size: 14px;
-  font-weight: 500;
-
-  border-radius: 4px;
-  background-color: #85e5ff;
-  transition: .7s all ease-in-out;
-  
-  font-family: 'poppins';
-  box-shadow: #0000000d 2px 8px 16px;
+  box-shadow: 0 4px 10px #DEE7E8;
+  cursor: pointer;
 }
 
-.best_product_chart span {
-  padding: 0 10px;
-  display: inline;
-  color: #00536a;
+input:hover, select:hover, textarea:hover, .btn:hover {
+  box-shadow: 0 4px 10px #DEE7E800;
+}
 
-  font-family: 'poppins';
+input:active, select:active, textarea:active, .btn:active {
+  border: 1px solid transparent;
+  box-shadow: 0 0 6px #c9c9c9 inset;
 }
 
 @import url('./styles/simpleChart.scss');
+@import url('./styles/dashboardNavbar.scss');
+@import url('./styles/DashboardSidebar.scss');
+@import url('./styles/dashboardHeader.scss');

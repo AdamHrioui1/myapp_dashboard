@@ -13,7 +13,8 @@ let GetBestByVisits = (visits, date1, date2, countries, referrers) => {
         let targetCountry = countries.filter(c => c._id === visit.country)[0]
 
         let referrerExist = Object.keys(bestReferrers).find(r => r === visit.referrer)
-        let targetReferrer = referrers.filter(r => r._id === visit.referrer)[0]
+        let targetReferrer = {}
+        targetReferrer = referrers.filter(r => r._id === visit.referrer)[0]
         
         if(countryExist) {
             bestCountries[targetCountry._id].total_visits += 1
@@ -31,10 +32,19 @@ let GetBestByVisits = (visits, date1, date2, countries, referrers) => {
             bestReferrers[targetReferrer._id].total_visits += 1
         }
         else {
-            bestReferrers[targetReferrer._id] = { 
-                _id: targetReferrer._id,
-                small_img: targetReferrer.small_img, 
-                total_visits: 1,
+            if(targetReferrer) {
+                bestReferrers[targetReferrer._id] = { 
+                    _id: targetReferrer._id,
+                    small_img: targetReferrer.small_img, 
+                    total_visits: 1,
+                }
+            }
+            else {
+                bestReferrers[visit.referrer] = { 
+                    _id: visit.referrer,
+                    small_img: 'https://cdn-icons-png.flaticon.com/64/3083/3083741.png ', 
+                    total_visits: 1,
+                }
             }
         }
     })

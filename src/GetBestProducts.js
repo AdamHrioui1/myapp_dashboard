@@ -39,6 +39,21 @@ let GetBestProducts = (products, orders, date1, date2) => {
                     small_img: targetProduct.small_img, 
                     total, capital, profit, total_units 
                 }
+                // if(Object.keys(targetProduct).length !== 0) {
+                //     bestProducts[targetProduct._id] = { 
+                //         _id: targetProduct._id, 
+                //         name: targetProduct.name, 
+                //         small_img: targetProduct.small_img, 
+                //         total, capital, profit, total_units 
+                //     }
+                // }
+                // else {
+                //     bestProducts[visit.referrer] = { 
+                //         _id: visit.referrer,
+                //         small_img: 'https://cdn-icons-png.flaticon.com/64/3083/3083741.png ', 
+                //         total_visits: 1,
+                //     }
+                // }
             }
         })
     })

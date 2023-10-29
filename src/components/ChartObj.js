@@ -84,7 +84,7 @@ export let ChartObj = (X, Y, name, type, diff, currency, groups, series) => {
                     labels: {
                         style: {
                             colors: "#707070",
-                            fontSize: '15px',
+                            fontSize: '12px',
                             fontFamily: 'Poppins',
                         },
                         formatter: (value) => {

@@ -1,0 +1,20 @@
+.dashboard__navbar {
+    position: fixed;
+    top: 0;
+    left: 235px;
+  
+    padding: 15px 20px;
+    padding-left: 0;
+    width: calc(100vw - 260px);
+
+    background-color: #F3FEFF;
+    border-bottom: 1px solid #e6e6e6;
+    z-index: 1000;
+
+    .title {
+        > h1 {
+            font-weight: 300;
+            font-size: 24px;
+        }
+    }
+}

@@ -1,0 +1,201 @@
+.left__side__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 225px;
+    height: 100vh;
+    overflow-y: auto;
+
+    .header {
+
+        .logo {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+
+            > h1 {
+                font-size: 24px;
+            }
+        }
+
+        .store__switch {
+            padding: 10px;
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            .top {
+                margin-bottom: 10px;
+                width: 100%;
+
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                > svg {
+                    > path {
+                        fill: #737373;
+                    }
+                    > rect {
+                        fill: #737373;
+                    }
+                }
+
+                > img {
+                    margin-right: 10px;
+                    width: 20px;
+                }
+
+                > span {
+                    color: #454545;
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+            }
+
+            > select {
+                padding: 5px;
+
+                outline: none;
+                border: 1px solid #85e5ff96;
+                border-radius: 6px;
+                
+                box-shadow: 0 4px 10px #DEE7E8;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+
+        .item {
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            border-radius: 6px;
+            cursor: pointer;
+        
+            > img {
+                width: 20px;
+            }
+
+            > span {
+                margin-left: 10px;
+                color: #454545;
+                font-size: 14px;
+            }
+
+            .img_container {
+                width: 16px;
+                height: 16px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                > svg {
+                    > path {
+                        fill: #737373;
+                    }
+                    > rect {
+                        fill: #737373;
+                    }
+                }
+            }
+
+            &:hover {
+                background-color: #3DE5F8;
+                > span {
+                    color: #fff;
+                }
+                
+                .img_container {
+                    > svg {
+                        > path {
+                            fill: #fff;
+                        }
+                        > rect {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        margin-top: auto;
+
+        .item {
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            cursor: pointer;
+            border-radius: 6px;
+        
+            > img {
+                width: 20px;
+            }
+
+            > span {
+                margin-left: 10px;
+                color: #454545;
+                font-size: 14px;
+            }
+
+            .img_container {
+                width: 20px;
+                height: 20px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                > svg {
+                    > path {
+                        fill: #737373;
+                    }
+                    > rect {
+                        fill: #737373;
+                    }
+                }
+
+                > img {
+                    margin-right: 10px;
+                    width: 20px;
+                }
+
+            }
+
+            &:hover {
+                background-color: #3DE5F8;
+                > span {
+                    color: #fff;
+                }
+                
+                .img_container {
+                    > svg {
+                        > path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

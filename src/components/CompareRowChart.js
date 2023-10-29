@@ -4,10 +4,12 @@ import { calcPercent, calcTotal, formatter } from "../Orders/OrderDatesFunctions
 import incomeUp from '../assets/income_up.svg'
 import incomeDown from '../assets/income_down.svg'
 
-let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, MainElements, sortBy }) => {
+let CompareRowChart = ({ props }) => {
+    let { main, title, Data, CompareChartsYaxis, ChartsYaxis, MainElements, sortBy, img } = props
     const [Percent, setPercent] = useState(0)
     const [Total, setTotal] = useState(0)
     const [ClickedItem, setClickedItem] = useState({ item: '', clicked: false, currency: true })
+    
     let state = useDashboardGlobalContext()
     let [StartDay] = state.StartDay
     let [EndDay] = state.EndDay
@@ -27,7 +29,7 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
         setTotal(calcTotal(ChartsYaxis, item.name))
         setClickedItem({ item: item.name, clicked: item.name === ClickedItem.item ? !ClickedItem.clicked : true, currency: item.currency })
     }
-    
+
     useEffect(() => {
         setPercent(calcPercent(CompareChartsYaxis, ChartsYaxis, main))
         setTotal(calcTotal(ChartsYaxis, main))
@@ -37,7 +39,12 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
         <div className='simple__chart__container'>
             <div className="header">
                 <div className='left'>
-                    <span>{title}:</span>
+                    <div className="img__title">
+                        <div className="img_container">
+                            <img src={`/assets/charts_icons/${img}`} alt="" />
+                        </div>
+                        <span>{title}</span>
+                    </div>
                     <h1>
                         {
                             ClickedItem.currency ?
@@ -62,13 +69,28 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
 
             <div className="content">
                 {
+                    Data.length !== 0 ?
                     Data
                     .sort((a, b) => b[sortBy] - a[sortBy])
-                    .map(product => {
+                    .slice(0, 4)
+                    .map((product, i) => {
                         return (
-                            <div className='body multiple' key={product.name}>
+                            <div className='body multiple' key={title + i}>
                                 <div className="left">
                                     <img src={product.small_img} alt="" title={product.name} />
+                                    {/* <div className="percent">
+                                        {
+                                            MainElements.map((element, i) => {
+                                                return (
+                                                    <div key={(i+1)*234} className={`content ${ClickedItem.clicked ? ClickedItem.item === MainElements[i].name ? '' : 'hide' : ''}`}>
+                                                        <span>
+                                                            ({ (product[element.name] / Totals[i] * 100).toFixed(2) }%)
+                                                        </span>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div> */}
                                 </div>
 
                                 <div className="center multiple_bars">
@@ -83,11 +105,7 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
                                                 >
                                                     <div className="popup">
                                                         <span></span>
-                                                        {
-                                                            element.currency ?
-                                                            `${formatter('USD').format(product[element.name])} (${(product[element.name] / Totals[i] * 100).toFixed(2)}%)` :
-                                                            `${product[element.name]} (${(product[element.name] / Totals[i] * 100).toFixed(2)}%)`
-                                                        }
+                                                        {(product[element.name] / Totals[i] * 100).toFixed(2)}%
                                                     </div>
                                                 </div>
                                             )
@@ -100,9 +118,7 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
                                     MainElements.map((element, i) => {
                                         return (
                                             <div key={(i+1)*234} className={`content ${ClickedItem.clicked ? ClickedItem.item === MainElements[i].name ? '' : 'hide' : ''}`}>
-                                                <span>
-                                                    ({ (product[element.name] / Totals[i] * 100).toFixed(2) }%)
-                                                </span>
+                                                
                                                 <span>
                                                     {
                                                         element.currency ?
@@ -110,6 +126,10 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
                                                         product[element.name]
                                                     }
                                                 </span>
+
+                                                {/* <span>
+                                                    ({ (product[element.name] / Totals[i] * 100).toFixed(2) }%)
+                                                </span> */}
                                             </div>
                                         )
                                     })
@@ -117,25 +137,36 @@ let CompareRowChart = ({ main, title, Data, CompareChartsYaxis, ChartsYaxis, Mai
                                 </div>
                             </div>
                         )
-                    })
+                    }) : 
+                    
+                    <div className='no__data'>
+                        <p>There was no data found for this date range.</p>
+                    </div>
                 }
             </div>
 
-            <div className="footer">
-                {
-                    MainElements.map((item, i) => {
-                        return (
-                            <div 
-                                className="item" 
-                                key={(i+1)*345} 
-                                onClick={() => ClickInItem(item)}
-                            >
-                                <div></div>
-                                <span>{item.title}</span>
-                            </div>
-                        )
-                    })
-                }
+            {
+                Data.length !== 0 ? 
+                <div className="footer">
+                    {
+                        MainElements.map((item, i) => {
+                            return (
+                                <div 
+                                    className="item" 
+                                    key={(i+1)*345} 
+                                    onClick={() => ClickInItem(item)}
+                                >
+                                    <div></div>
+                                    <span>{item.title}</span>
+                                </div>
+                            )
+                        })
+                    }
+                </div> : ''
+            }
+
+            <div className="see_more">
+                <a href="/">See more 🡒</a>                
             </div>
         </div>
     )
